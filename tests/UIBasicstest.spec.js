@@ -1,6 +1,6 @@
 const {test} = require('@playwright/test')
 
-test('Browser Context Playwright test', async ({browser})=>{
+test.only('Browser Context Playwright test', async ({browser})=>{
 
     //chrome - plugins/cookies
     const context = await browser.newContext();
@@ -11,6 +11,6 @@ test('Browser Context Playwright test', async ({browser})=>{
 
 test('Page First Playwright test', async ({browser,page})=>{
 
-    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    await page.goto("https://www.google.com/");
 
 })
