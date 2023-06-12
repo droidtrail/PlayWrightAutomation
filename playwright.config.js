@@ -11,7 +11,10 @@ const config = {
   reporter:'html',
   /* Shared settings for all the projects below.*/
   use:{
-    browserName:'chromium'
+    // browserName:'webkit',
+    browserName:'chromium',
+    // browserName:'firefox',
+    headless: false
   }
 };
 
