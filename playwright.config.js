@@ -12,8 +12,8 @@ const config = {
   /* Shared settings for all the projects below.*/
   use:{
     // browserName:'webkit',
-    browserName:'chromium',
-    // browserName:'firefox',
+    // browserName:'chromium',
+    browserName:'firefox',
     headless: false
   }
 };
