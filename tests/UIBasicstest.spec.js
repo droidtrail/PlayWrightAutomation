@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.only('Browser Context Playwright test', async ({ browser }) => {
+test('Browser Context Playwright test', async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
     const userName = page.locator('#username');
@@ -53,4 +53,25 @@ test('UI Controls', async ({ browser, page }) => {
     expect(await checkboxTerms.isChecked()).toBeTruthy();
     await expect(documentLink).toHaveAttribute("class","blinkingText");
     // await page.pause();
+});
+test.only('Child window handling', async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    const documentLink = page.locator("[href*='documents-request']");
+    const userName = page.locator('#username');
+    await expect(documentLink).toHaveAttribute("class","blinkingText");
+
+    const [newPage] = await Promise.all([
+        context.waitForEvent('page'),
+        documentLink.click(),
+    ])
+    const text = await newPage.locator(".red").textContent();
+    const arrayText = text.split("@");
+    const domain = arrayText[1].split(" ")[0]
+    console.log('Resultado: '+ domain);
+    await userName.type(domain);
+    await page.pause();
+    console.log(await userName.textContent());
 });
