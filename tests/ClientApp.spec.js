@@ -9,5 +9,4 @@ test.only('Browser Context Playwright test', async ({page})=>{
     await page.waitForLoadState('networkidle');
     const titles = await page.locator(".card-body a").allTextContents();
     console.log(titles);
-    
 });
