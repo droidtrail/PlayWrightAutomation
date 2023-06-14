@@ -35,16 +35,20 @@ test.only('Browser Context Playwright test', async ({ browser }) => {
     const allTitles = await cardTitles.allTextContents();
     console.log(allTitles);
 });
-test('Page First Playwright test', async ({ browser, page }) => {
+test('UI Controls', async ({ browser, page }) => {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     const userName = page.locator('#username');
     const password = page.locator("[type='password']");
     const dropdown = page.locator("select.form-control");
     const popUpOk = page.locator("#okayBtn");
     const radioButtonUser = page.locator(".radiotextsty");
+    const checkboxTerms = page.locator("#terms");
 
     await dropdown.selectOption("Consultant");
     await radioButtonUser.last().click();
     await popUpOk.click();
+    await expect(radioButtonUser.last()).toBeChecked();
+    await checkboxTerms.click();
+    await expect(checkboxTerms.isChecked()).toBeTruthy();
     await page.pause();
 });
