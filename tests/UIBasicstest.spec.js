@@ -43,12 +43,14 @@ test('UI Controls', async ({ browser, page }) => {
     const popUpOk = page.locator("#okayBtn");
     const radioButtonUser = page.locator(".radiotextsty");
     const checkboxTerms = page.locator("#terms");
+    const documentLink = page.locator("[href*='documents-request']");
 
     await dropdown.selectOption("Consultant");
     await radioButtonUser.last().click();
     await popUpOk.click();
     await expect(radioButtonUser.last()).toBeChecked();
     await checkboxTerms.click();
-    await expect(checkboxTerms.isChecked()).toBeTruthy();
-    await page.pause();
+    expect(await checkboxTerms.isChecked()).toBeTruthy();
+    await expect(documentLink).toHaveAttribute("class","blinkingText");
+    // await page.pause();
 });
