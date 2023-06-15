@@ -14,9 +14,11 @@ const config = {
     // browserName:'webkit',
     // browserName:'chromium',
     browserName:'firefox',
-    headless: false
+    headless: false,
+    screenshot:'on',
+    trace:'retain-on-failure',
+    // trace:'on',
   }
 };
 
-module.exports = config;
 

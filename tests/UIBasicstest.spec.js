@@ -54,7 +54,7 @@ test('UI Controls', async ({ browser, page }) => {
     await expect(documentLink).toHaveAttribute("class","blinkingText");
     // await page.pause();
 });
-test.only('Child window handling', async ({ browser }) => {
+test('Child window handling', async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -72,6 +72,6 @@ test.only('Child window handling', async ({ browser }) => {
     const domain = arrayText[1].split(" ")[0]
     console.log('Resultado: '+ domain);
     await userName.type(domain);
-    await page.pause();
+    // await page.pause();
     console.log(await userName.textContent());
 });
