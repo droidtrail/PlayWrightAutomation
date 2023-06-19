@@ -1,7 +1,8 @@
 const { test, expect, request } = require('@playwright/test');
 const loginPayLoad = { userEmail: "leandro.pereiracr@gmail.com", userPassword: "x85.2eRYwab6BY" };
+let token;
 
-test.beforeAll(async ({request}) => 
+test.beforeAll(async () => 
 {
     const apiContext = await request.newContext();
     const loginResponse = await apiContext.post("https://rahulshettyacademy.com/api/ecom/auth/login",
@@ -10,22 +11,26 @@ test.beforeAll(async ({request}) =>
         }
     )
     expect(loginResponse.ok()).toBeTruthy();
-    const loginResponseJson = loginResponse.json();
-    const token = loginResponseJson.token;
+    const loginResponseJson = await loginResponse.json();
+    token = loginResponseJson.token;
+    console.log('Resposta >>>>>> ' + token);
 });
 
 test.beforeEach(() => {
 
 });
 
-test('Browser Context Playwright test', async ({ page }) => {
+test('Place the order', async ({ page }) => {
+
+    page.addInitScript(value => {
+        window.localStorage.setItem('token',value);
+
+    }, token );
+
+    await page.goto("https://rahulshettyacademy.com/client");
+    const products = page.locator(".card-body");
     const email = "leandro.pereiracr@gmail.com";
     const productName = 'zara coat 3';
-    const products = page.locator(".card-body");
-    // await page.goto("https://rahulshettyacademy.com/client");
-    // await page.locator("#userEmail").fill(email);
-    // await page.locator("#userPassword").fill("x85.2eRYwab6BY");
-    // await page.locator("[value='Login']").click();
     await page.waitForLoadState('networkidle');
     //Zara Coat 4
     const count = await products.count();
