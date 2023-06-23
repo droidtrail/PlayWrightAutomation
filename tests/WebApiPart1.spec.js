@@ -9,7 +9,6 @@ test.beforeAll(async () =>
     const api_utils = new apiUtils(apiContext, loginPayLoad);
     response = await api_utils.createOrder(orderPayLoad);
 });
-
 test('Place the order', async ({ page }) => {
     page.addInitScript(value => {
         window.localStorage.setItem('token',value);
