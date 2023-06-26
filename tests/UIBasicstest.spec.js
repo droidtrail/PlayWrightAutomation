@@ -1,13 +1,16 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect, request } = require('@playwright/test');
 
-test('Browser Context Playwright test', async ({ browser }) => {
+test.only('Browser Context Playwright test', async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
+    // page.route('**/*.css',route=>route.abort());
+    page.route('**/*.{jpg,png,jpeg}',route=>route.abort());
     const userName = page.locator('#username');
     const password = page.locator("[type='password']");
     const signIn = page.locator("#signInBtn");
     const cardTitles = page.locator(".card-body a");
-
+    page.on('request',request=>console.log('Request >>>>> ' +request.url()));
+    page.on('response',response=>console.log('Response >>>>> ' +response.url()));
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     console.log('Resultado: ' + await page.title());
     await expect(page).toHaveTitle("LoginPage Practise | Rahul Shetty Academy");
