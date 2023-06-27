@@ -1,14 +1,17 @@
 const { test, expect } = require('@playwright/test');
-const {LoginPage} = require('../pageObjects/LoginPage');
-const {DashboardPage} = require('../pageObjects/DashboardPage');
+const {POManager} = require('../pageObjects/POManager');
+
 
 test('Browser Context Playwright test', async ({ page }) => {
+    // Declarando variáveis
     const username = "leandro.pereiracr@gmail.com";
     const password = "x85.2eRYwab6BY";
     const productName = 'zara coat 3';
-    // const products = page.locator(".card-body");
-    const loginPage = new LoginPage(page);
-    const dashboardPage = new DashboardPage(page);
+    // Instanciando as classes
+    const poManager = new POManager(page);
+    const loginPage = poManager.getLoginPage();
+    const dashboardPage = poManager.getDashboardPage();
+
     await loginPage.goTo();
     await loginPage.validLogin(username,password);
     await dashboardPage.searchProductAddCart(productName);
