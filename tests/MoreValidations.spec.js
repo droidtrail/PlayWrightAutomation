@@ -19,7 +19,7 @@ test("How to automate Java/JavaScript Alert popups with Playwright", async ({ pa
     await page.pause();
 })
 
-test.only("How to handle & Automate frames with Playwright", async ({ page }) => {
+test("How to handle & Automate frames with Playwright", async ({ page }) => {
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
     const framesPage = page.frameLocator("#courses-iframe"); // this will give new page object
     await page.locator("#courses-iframe").scrollIntoViewIfNeeded();
@@ -27,6 +27,16 @@ test.only("How to handle & Automate frames with Playwright", async ({ page }) =>
     const textCheck = await framesPage.locator(".text h2").textContent();
     await expect(textCheck.split(" ")[1]).toEqual('13,522');
     console.log('Resultado >>>>>>> ' + textCheck.split(" ")[1]);
+})
+
+test.only("Screenshot & Visual comparision", async ({ page }) => {
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+    await expect(page.locator("#displayed-text")).toBeVisible();
+    await page.locator("#displayed-text").screenshot({path:'partialScreenshot_1.png'});//screenshot de um único elemento
+    await page.locator("#hide-textbox").click();
+    await page.screenshot({path: 'screenshot.png'});//screenshot da página inteira
+    await expect(page.locator("#displayed-text")).toBeHidden();
+    // await page.pause();
 })
 
 
