@@ -29,14 +29,19 @@ test("How to handle & Automate frames with Playwright", async ({ page }) => {
     console.log('Resultado >>>>>>> ' + textCheck.split(" ")[1]);
 })
 
-test.only("Screenshot & Visual comparision", async ({ page }) => {
+test("Screenshot & Visual comparision", async ({ page }) => {
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
     await expect(page.locator("#displayed-text")).toBeVisible();
-    await page.locator("#displayed-text").screenshot({path:'partialScreenshot_1.png'});//screenshot de um único elemento
+    await page.locator("#displayed-text").screenshot({ path: 'partialScreenshot_1.png' });//screenshot de um único elemento
     await page.locator("#hide-textbox").click();
-    await page.screenshot({path: 'screenshot.png'});//screenshot da página inteira
+    await page.screenshot({ path: 'screenshot.png' });//screenshot da página inteira
     await expect(page.locator("#displayed-text")).toBeHidden();
     // await page.pause();
+})
+
+test.only('Visual', async ({ page }) => {
+    await page.goto("https://www.rediff.com/");
+    expect(await page.screenshot()).toMatchSnapshot('landing.png');
 })
 
 

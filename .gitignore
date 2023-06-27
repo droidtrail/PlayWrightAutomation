@@ -1,5 +1,5 @@
 node_modules/
-/test-results/
+/test-results/*
 /tests/coverage-report
 .local-browsers/
 /.dev_profile*
@@ -31,3 +31,4 @@ test-results
 .cache/
 .eslintcache
 state.json
+tests/MoreValidations.spec.js-snapshots/screenshot-test-landing-win32.png
