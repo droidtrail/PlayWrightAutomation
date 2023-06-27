@@ -1,26 +1,20 @@
 const { test, expect } = require('@playwright/test');
 const {LoginPage} = require('../pageObjects/LoginPage');
+const {DashboardPage} = require('../pageObjects/DashboardPage');
 
 test('Browser Context Playwright test', async ({ page }) => {
     const username = "leandro.pereiracr@gmail.com";
     const password = "x85.2eRYwab6BY";
     const productName = 'zara coat 3';
-    const products = page.locator(".card-body");
+    // const products = page.locator(".card-body");
     const loginPage = new LoginPage(page);
-    loginPage.goTo();
-    loginPage.validLogin(username,password);
-    await page.waitForLoadState('networkidle');
-    //Zara Coat 4
-    const count = await products.count();
-    for (let i = 0; i <= count; i++) {
-        if (await products.nth(i).locator("b").textContent() === productName) {
-            //add to cart
-            await products.nth(i).locator("text= Add To Cart").click();
-            break;
-        }
-    }
-    await page.locator("[routerlink='/dashboard/cart']").click();
-    await page.locator("div li").first().waitFor();
+    const dashboardPage = new DashboardPage(page);
+    await loginPage.goTo();
+    await loginPage.validLogin(username,password);
+    await dashboardPage.searchProductAddCart(productName);
+    await dashboardPage.navigateToCart();
+    
+
     const bool = await page.locator("h3:has-text('zara coat 3')").isVisible();
     expect(bool).toBeTruthy();
     await page.locator("button[type='button']").last().click();

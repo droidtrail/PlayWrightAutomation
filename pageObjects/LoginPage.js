@@ -15,6 +15,7 @@ class LoginPage {
         await this.signUserEmail.type(username);
         await this.userPassword.type(password);
         await this.signInbutton.click();
+        await this.page.waitForLoadState('networkidle');
     }
 }
 module.exports = {LoginPage};

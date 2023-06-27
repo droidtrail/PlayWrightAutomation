@@ -18,6 +18,7 @@ test('Browser Context Playwright test', async ({ page }) => {
             break;
         }
     }
+
     await page.locator("[routerlink='/dashboard/cart']").click();
     await page.locator("div li").first().waitFor();
     const bool = await page.locator("h3:has-text('zara coat 3')").isVisible();
