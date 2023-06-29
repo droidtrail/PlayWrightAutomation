@@ -2,7 +2,7 @@ class DashboardPage {
     constructor(page) {
         this.products = page.locator(".card-body");
         this.cart = page.locator("[routerlink='/dashboard/cart']");
-        this.waitCartPageLoad = page.locator("div li");
+        this.orders = page.locator("[routerlink*='myorders']").first();
     }
 
     async searchProductAddCart(productName) {
@@ -19,7 +19,11 @@ class DashboardPage {
     async navigateToCart()
     {
         await this.cart.click();
-        await this.waitCartPageLoad.first().waitFor();
+        
+    }
+    async navigateToOrders()
+    {
+        await this.orders.click();
     }
 }
 module.exports = {DashboardPage};

@@ -9,12 +9,11 @@ const config = {
     timeout: 5000
   },
   reporter:'html',
+  
   /* Shared settings for all the projects below.*/
   use:{
     viewport: { width: 1600, height: 1200 },
-    // browserName:'webkit',
     browserName:'chromium',
-    // browserName:'firefox',
     headless: false,
     screenshot:'on',
     // trace:'retain-on-failure',
