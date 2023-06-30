@@ -1,24 +1,32 @@
-// @ts-check
-const { defineConfig, devices, firefox } = require('@playwright/test');
+const { devices } = require('@playwright/test');
 
 const config = {
-  testDir:'./tests',
-  /*Maximum time one test can run for. */
+  testDir: './tests',
   timeout: 30 * 1000,
-  expect:{
+  expect: {
     timeout: 5000
   },
-  reporter:'html',
-  
-  /* Shared settings for all the projects below.*/
-  use:{
-    viewport: { width: 1600, height: 1200 },
-    browserName:'chromium',
-    headless: false,
-    screenshot:'on',
-    // trace:'retain-on-failure',
-    trace:'on',
-  }
+  reporter: 'html',
+  projects : [
+    {
+      name : 'Firefox',
+      use: {
+        browserName : 'firefox',
+        headless: false,
+        screenshot: 'off',
+        trace: 'on'
+      },
+    },
+    {
+      name:'chrome',
+      use: {
+        viewport: { width: 1600, height: 1200 },
+        browserName: 'chromium',
+        headless: false,
+        screenshot: 'on',
+        trace: 'on'
+      },
+    }
+  ]
 };
-
-
+module.exports = config;
