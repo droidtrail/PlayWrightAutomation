@@ -14,6 +14,7 @@ const config = {
         browserName : 'firefox',
         headless: false,
         screenshot: 'off',
+        video: 'on-first-retry',
         trace: 'on',
         // viewport:{width:720, height:720}
       },
@@ -25,11 +26,11 @@ const config = {
         browserName: 'chromium',
         headless: false,
         screenshot: 'on',
+        video: 'retain-on-failure',
         ignoreHttpsErros:true,
         Permissions:['geolocation'],
         trace: 'on',
-        // ...devices['iPhone 11']
-        
+        ...devices['iPhone 11']
       },
     }
   ]
