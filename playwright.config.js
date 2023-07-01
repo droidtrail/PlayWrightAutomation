@@ -2,6 +2,7 @@ const { devices } = require('@playwright/test');
 
 const config = {
   retries: 1,
+  workers: 3,
   testDir: './tests',
   timeout: 30 * 1000,
   expect: {
@@ -31,8 +32,8 @@ const config = {
         ignoreHttpsErros:true,
         Permissions:['geolocation'],
         trace: 'on',
-        ...devices['iPhone 11']
-      },
+        // ...devices['iPhone 11']
+      }//,
     }
   ]
 };

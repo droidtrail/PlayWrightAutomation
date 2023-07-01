@@ -31,7 +31,7 @@ for (const data of dataSet) {
         expect(orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy();
     })
 }
-customtest.only("Client App login data as fixture", async ({ page, testDataForOrder }) => {
+customtest("Client App login data as fixture", async ({ page, testDataForOrder }) => {
     const countryCode = 'Brazi';
     const countryName = 'Brazil';
     // Instanciando as classes
