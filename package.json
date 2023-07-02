@@ -6,7 +6,7 @@
   "scripts": {
     "regression": "npx playwright test",
     "webTests": "npx playwright test --grep @Web",
-    "APITests": "npx playwright test --grep '@API'",
+    "APITests": "npx playwright test --grep @API",
     "FirefoxNewConfig": "npx playwright test --project=Firefox",
     "ChromeNewConfig": "npx playwright test --project=chrome"
   },
