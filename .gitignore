@@ -32,3 +32,4 @@ test-results
 .eslintcache
 state.json
 tests/MoreValidations.spec.js-snapshots/screenshot-test-landing-win32.png
+*.png
