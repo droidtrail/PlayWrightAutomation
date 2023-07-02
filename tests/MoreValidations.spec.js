@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe.configure({mode:'parallel'});
-test("Popup validations", async ({ page }) => {
+test("@Web Popup validations", async ({ page }) => {
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
     await expect(page.locator("#displayed-text")).toBeVisible();
     await page.locator("#hide-textbox").click();

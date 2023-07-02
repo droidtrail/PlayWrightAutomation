@@ -1,6 +1,6 @@
 const { test, expect, request } = require('@playwright/test');
 
-test('Browser Context Playwright test', async ({ browser }) => {
+test('@Web Browser Context Playwright test', async ({ browser }) => {
     const context = await browser.newContext();
     const page = await context.newPage();
     // page.route('**/*.css',route=>route.abort());
@@ -38,7 +38,7 @@ test('Browser Context Playwright test', async ({ browser }) => {
     const allTitles = await cardTitles.allTextContents();
     console.log(allTitles);
 });
-test('UI Controls', async ({ browser, page }) => {
+test('@Web UI Controls', async ({ browser, page }) => {
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     const userName = page.locator('#username');
     const password = page.locator("[type='password']");

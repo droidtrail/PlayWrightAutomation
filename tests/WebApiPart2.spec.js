@@ -64,7 +64,7 @@ test('Browser Context Playwright test', async () => {
     expect(orderId.includes(orderIdDetails)).toBeTruthy();
     // await page.pause();
 });
-test('Teste case 2', async () => {
+test('@API Teste case 2', async () => {
     const email = "";
     const productName = 'zara coat 3';
     const page = await webContext.newPage();

@@ -4,7 +4,7 @@ const { POManager } = require('../pageObjects/POManager');
 //Json >> String >> Js object
 const dataSet = JSON.parse(JSON.stringify(require("../utils/placeorderTestData.json")));
 for (const data of dataSet) {
-    test(`Client App login for ${data.productName}`, async ({ page }) => {
+    test(`@Web Client App login for ${data.productName}`, async ({ page }) => {
         const countryCode = 'Brazi';
         const countryName = 'Brazil';
         // Instanciando as classes
