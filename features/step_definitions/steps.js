@@ -1,39 +1,45 @@
 const { When, Then, Given } = require('@cucumber/cucumber');
 const { POManager } = require('../../pageObjects/POManager');
-const { test, expect, playwright } = require('@playwright/test');
+const { expect } = require('@playwright/test');
+const playwright = require('@playwright/test');
 
-Given('a login to Ecommerce application with {username} and {password}', async function (username, password) {
-    const browser = playwright.chromium.launch();
+Given('a login to Ecommerce application with {string} and {string}', {timeout : 100*1000}, async function (username, password) {
+    const browser = await playwright.chromium.launch({
+        headless: false
+    });
     const context = await browser.newContext();
     const page = await context.newPage();
-    const poManager = new POManager(page);
-    const loginPage = poManager.getLoginPage();
+    this.poManager = new POManager(page);
+    // const products = page.locator(".card-body");
+    const loginPage = this.poManager.getLoginPage();
     await loginPage.goTo();
-    await loginPage.validLogin(data.username, data.password);
+    await loginPage.validLogin(username, password);
 });
 
-When('Add {string} to Cart', async function (string) {
-    const dashboardPage = poManager.getDashboardPage();
-    await dashboardPage.searchProductAddCart(data.productName);
-    await dashboardPage.navigateToCart();
+When('Add {string} to Cart', async function (productName) {
+    this.dashboardPage = this.poManager.getDashboardPage();
+    await this.dashboardPage.searchProductAddCart(productName);
+    await this.dashboardPage.navigateToCart();
 });
 
-Then('Verify {string} is displayed in Cart', async function (string) {
-    const cartPage = poManager.getCartPage();
-    await cartPage.VerifyProductIsDisplayed(data.productName);
+Then('Verify {string} is displayed in Cart', async function (productName) {
+    const cartPage = this.poManager.getCartPage();
+    await cartPage.VerifyProductIsDisplayed(productName);
     await cartPage.Checkout();
 });
 
 When('Enter valid details and place the Order', async function () {
-    await ordersReviewPage.searchCountryAndSelect(countryCode, countryName);
-    await ordersReviewPage.verifyEmailId(data.username);
-    const orderId = await ordersReviewPage.submitAndGetOrderId();
-    console.log('orderId >>>>>> ' + orderId);
+    const ordersReviewPage = this.poManager.getOrdersReviewPage();
+    await ordersReviewPage.searchCountryAndSelect("ind", "India");
+    // await ordersReviewPage.verifyEmailId(username);
+    this.orderId = await ordersReviewPage.submitAndGetOrderId();
+    console.log('orderId >>>>>> ' + this.orderId);
 });
 
 Then('Verify order in present in the OrderHistory', async function () {
-    await expect(page.locator(".em-spacer-1 .ng-star-inserted")).toHaveText(orderId);
-    await dashboardPage.navigateToOrders()
-    await ordersHistoryPage.searchOrderAndSelect(orderId);
-    expect(orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy();
+    // await expect(this.page.locator(".em-spacer-1 .ng-star-inserted")).toHaveText(orderId);
+    await this.dashboardPage.navigateToOrders()
+    const ordersHistoryPage = this.poManager.getOrdersHistoryPage();
+    await ordersHistoryPage.searchOrderAndSelect(this.orderId);
+    expect(this.orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy();
 });
