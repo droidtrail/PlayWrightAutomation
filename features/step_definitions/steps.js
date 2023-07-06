@@ -3,8 +3,8 @@ const { POManager } = require('../../pageObjects/POManager');
 const { expect } = require('@playwright/test');
 const playwright = require('@playwright/test');
 
-Given('a login to Ecommerce application with {string} and {string}', {timeout : 100*1000}, async function (username, password) {
-   
+Given('a login to Ecommerce application with {string} and {string}', { timeout: 100 * 1000 }, async function (username, password) {
+
     // const products = this.page.locator(".card-body");
     const loginPage = this.poManager.getLoginPage();
     await loginPage.goTo();
@@ -37,4 +37,22 @@ Then('Verify order in present in the OrderHistory', async function () {
     const ordersHistoryPage = this.poManager.getOrdersHistoryPage();
     await ordersHistoryPage.searchOrderAndSelect(this.orderId);
     expect(this.orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy();
+});
+
+Given('a login to Ecommerce2 application with {string} and {string}', async function (username, password2) {
+    const userName = this.page.locator('#username');
+    const password = this.page.locator("[type='password']");
+    const signIn = this.page.locator("#signInBtn");
+    await this.page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    console.log('Resultado: ' + await this.page.title());
+    await expect(this.page).toHaveTitle("LoginPage Practise | Rahul Shetty Academy");
+    //css
+    await userName.type(username);
+    await password.type(password2);
+    await signIn.click();
+});
+
+Then('Verify Error message is displayed', async function () {
+    console.log('Resultado: ' + await this.page.locator("[style*='block']").textContent());
+    await expect(this.page.locator("[style*='block']")).toContainText('Incorrect username/password.');
 });
