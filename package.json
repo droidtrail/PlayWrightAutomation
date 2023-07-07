@@ -8,7 +8,9 @@
     "webTests": "npx playwright test --grep @Web",
     "APITests": "npx playwright test --grep @API",
     "FirefoxNewConfig": "npx playwright test --project=Firefox",
-    "ChromeNewConfig": "npx playwright test --project=chrome"
+    "ChromeNewConfig": "npx playwright test --project=chrome",
+    "CucumberRegression": "npx cucumber-js --tags '@Regression' --retry 1 --exit --format html:cucumber-report.html"
+
   },
   "keywords": [],
   "author": "",
